@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const users = require("./routes/api/users");
 const birthdays = require("./routes/api/birthdays");
 const passport = require('passport');
-require('./config/passport')(passport);
+
+// config
+const db = require('./config/keys').mongoURI;
 
 // Heroku
 const path = require("path");
@@ -16,6 +17,8 @@ mongoose
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
 
+const port = process.env.PORT || 5000;
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
     app.get('/', (req, res) => {
@@ -23,13 +26,13 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
+app.use(passport.initialize());
+require('./config/passport')(passport);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
-
+// Api Routes
 app.use("/api/users", users);
 app.use("/api/birthdays", birthdays);
 
-app.use(passport.initialize());
+app.listen(port, () => console.log(`Server is running on port ${port}`));
