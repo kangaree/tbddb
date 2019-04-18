@@ -19,7 +19,7 @@ const Protected = ({ component: Component, loggedIn, ...rest }) => (
       loggedIn ? (
         <Component {...props} />
       ) : (
-          <Redirect to={"/birthdays/" + new Date(Date.now()).getMonth() + "/" + new Date(Date.now()).getDate()} />
+          <Redirect to={"/birthdays/" + (new Date(Date.now()).getMonth() + 1) + "/" + new Date(Date.now()).getDate()} />
       )
     }
   />
