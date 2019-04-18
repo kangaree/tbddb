@@ -25,6 +25,7 @@ h3 {
 .birthdayWrapper {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .person {
