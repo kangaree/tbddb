@@ -1,7 +1,7 @@
 // src/components/app.js
 
 import React from 'react';
-import { AuthRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Route, Switch } from 'react-router-dom';
 import NavBarContainer from './nav/navbar_container';
 
@@ -17,7 +17,7 @@ const App = () => (
         <Switch>
             <Route exact path="/birthdays/:month/:day" component={BirthdayContainer} />
 
-            <AuthRoute exact path="/" component={MainPage} />
+            <ProtectedRoute exact path="/" component={MainPage} />
             <AuthRoute exact path="/login" component={LoginFormContainer} />
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
         </Switch>
