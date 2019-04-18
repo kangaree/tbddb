@@ -8,10 +8,20 @@ const birthdays = require("./routes/api/birthdays");
 const passport = require('passport');
 require('./config/passport')(passport);
 
+// Heroku
+const path = require("path");
+
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    app.get('/', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    })
+}
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
