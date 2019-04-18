@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import Person from '../people/person';
 import "./birthday.css";
@@ -37,10 +38,19 @@ class Birthday extends React.Component {
 
             return (
               <>
-                <h2>{parseInt(this.props.match.params.month) === parseInt(today.getMonth()) + 1 && parseInt(this.props.match.params.day) === parseInt(today.getDate()) ? "Happy Birthday" : this.props.match.params.month + "/" + this.props.match.params.day }</h2>
+                <h2>
+                    {parseInt(this.props.match.params.month) === parseInt(today.getMonth()) + 1 && parseInt(this.props.match.params.day) === parseInt(today.getDate()) ? 
+                    "Today's Birthdays" 
+                    : 
+                    this.props.match.params.month + "/" + this.props.match.params.day }
+                </h2>
+                <h3>{parseInt(this.props.match.params.month) === parseInt(today.getMonth()) + 1 && parseInt(this.props.match.params.day) === parseInt(today.getDate()) ?
+                    "Happy Birthday!"
+                    :
+                    "Happy Not Birthday!"}</h3>
                 <div className="birthdayWrapper">
                         {this.state.people.slice(0,100).map(person => (
-                            <Person key={person._id} name={person.name} description={person.description} image={person.image}/>
+                            <Person key={person._id} name={person.name} description={person.description} image={person.image} year={person.year}/>
                         ))}
                 </div>
               </>
