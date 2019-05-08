@@ -5,8 +5,9 @@ class Person extends React.Component {
         return (
             <div className="person">
                 <a href={"https://en.wikipedia.org/wiki/" + this.props.name}>
-                    <img src={this.props.image + "?width=100"} alt={this.props.name} title={this.props.description} ></img>
-                    <h3 className="person-name">{this.props.name} <br></br>({this.props.year})</h3>                              
+                    <img src={this.props.image + "?width=300"} alt={this.props.name} title={this.props.description} ></img>
+                    <h3 className="person-name">{this.props.currentYear - this.props.year} years old</h3>                              
+                    <h3 className="person-name">{this.props.name}</h3>                              
                 </a>
             </div>
         );
