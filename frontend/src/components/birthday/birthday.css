@@ -37,6 +37,8 @@ h3 {
     -moz-column-gap:      0px;
     column-count:         5;
     column-gap:           0px; 
+
+    margin-top: 10px;
 }
 
 .person-name {
